@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2013 Peter Selinger.
+/* Copyright (C) 2001-2015 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -26,8 +26,8 @@
 #include "config.h"
 #endif
 
-#define SAFE_MALLOC(var, n, typ) \
-  if ((var = (typ *)malloc((n)*sizeof(typ))) == NULL) goto malloc_error 
+#define SAFE_CALLOC(var, n, typ) \
+  if ((var = (typ *)calloc(n, sizeof(typ))) == NULL) goto calloc_error 
 
 typedef int color_t;
 
@@ -232,10 +232,10 @@ static int eps_path_short(privcurve_t *curve) {
   double M;
   int m = curve->n;
 
-  SAFE_MALLOC(bq, m, long int);
-  SAFE_MALLOC(aq, m, long int);
-  SAFE_MALLOC(v, m, point_t);
-  SAFE_MALLOC(q, m, dpoint_t);
+  SAFE_CALLOC(bq, m, long int);
+  SAFE_CALLOC(aq, m, long int);
+  SAFE_CALLOC(v, m, point_t);
+  SAFE_CALLOC(q, m, dpoint_t);
 
   /* quantize vertices */
   for (i=0; i<m; i++) {
@@ -295,7 +295,7 @@ static int eps_path_short(privcurve_t *curve) {
   free(q);
   return 0;
 
- malloc_error:
+ calloc_error:
   free(bq);
   free(aq);
   free(v);
@@ -684,7 +684,7 @@ static int eps_init(imginfo_t *imginfo) {
   char *c0, *c1;
 
   shipcom("%%!PS-Adobe-3.0 EPSF-3.0\n");
-  shipcom("%%%%Creator: "POTRACE" "VERSION", written by Peter Selinger 2001-2013\n");
+  shipcom("%%%%Creator: "POTRACE" "VERSION", written by Peter Selinger 2001-2015\n");
   shipcom("%%%%LanguageLevel: %d\n", info.pslevel);
   shipcom("%%%%BoundingBox: 0 0 %.0f %.0f\n", 
 	  ceil(imginfo->trans.bb[0]+imginfo->lmar+imginfo->rmar),
@@ -759,7 +759,7 @@ int init_ps(FILE *fout) {
   eps_callbacks(fout);
 
   shipcom("%%!PS-Adobe-3.0\n");
-  shipcom("%%%%Creator: "POTRACE" "VERSION", written by Peter Selinger 2001-2013\n");
+  shipcom("%%%%Creator: "POTRACE" "VERSION", written by Peter Selinger 2001-2015\n");
   shipcom("%%%%LanguageLevel: %d\n", info.pslevel);
   shipcom("%%%%BoundingBox: 0 0 %d %d\n", info.paperwidth, info.paperheight);
   shipcom("%%%%Pages: (atend)\n");

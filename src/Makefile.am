@@ -1,4 +1,4 @@
-## Copyright (C) 2001-2013 Peter Selinger.
+## Copyright (C) 2001-2015 Peter Selinger.
 ## This file is part of Potrace. It is free software and it is covered
 ## by the GNU General Public License. See the file COPYING for details.
 
@@ -24,7 +24,7 @@ potrace_LDADD = libpotrace.la @EXTRA_OBJS@ -lm @EXTRA_LIBS@
 potrace_DEPENDENCIES = libpotrace.la @EXTRA_OBJS@
 
 mkbitmap_SOURCES = mkbitmap.c bitmap_io.c bitmap_io.h greymap.c	\
- greymap.h platform.h
+ greymap.h platform.h bitmap.h potracelib.h bitops.h
 mkbitmap_LDADD = @EXTRA_OBJS@ -lm
 mkbitmap_DEPENDENCIES = @EXTRA_OBJS@
 
@@ -42,7 +42,7 @@ libsources = curve.c curve.h trace.c trace.h decompose.c		\
 lib_LTLIBRARIES = $(INSTLIBS)
 EXTRA_LTLIBRARIES = libpotrace.la
 libpotrace_la_SOURCES = $(libsources)
-libpotrace_la_LDFLAGS = -version-info 0:1:0 -rpath '$(libdir)' \
+libpotrace_la_LDFLAGS = -version-info 0:2:0 -rpath '$(libdir)' \
  -export-symbols $(srcdir)/libpotrace-export.sym -no-undefined
 libpotrace_la_LIBADD = -lm
 MOSTLYCLEANFILES = libpotrace.la

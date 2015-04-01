@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Copyright (C) 2001-2013 Peter Selinger.
+# Copyright (C) 2001-2015 Peter Selinger.
 # This file is free software and it is covered by the GNU general
 # public license. See the file COPYING for details.
 

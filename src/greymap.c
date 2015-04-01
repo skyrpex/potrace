@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2013 Peter Selinger.
+/* Copyright (C) 2001-2015 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <errno.h>
 
 #include "greymap.h"
 #include "bitops.h"
@@ -23,10 +24,17 @@ static int gm_readbody_bmp(FILE *f, greymap_t **gmp);
 /* ---------------------------------------------------------------------- */
 /* basic greymap routines */
 
-/* return new un-initialized greymap. NULL with errno on error */
-
+/* return new un-initialized greymap. NULL with errno on error.
+   Assumes w, h >= 0. */
 greymap_t *gm_new(int w, int h) {
   greymap_t *gm;
+  ssize_t size = (ssize_t)w * (ssize_t)h * (ssize_t)sizeof(signed short int);
+  
+  /* check for overflow error */
+  if (size < 0 || size / w / h != sizeof(signed short int)) {
+    errno = ENOMEM;
+    return NULL;
+  }
 
   gm = (greymap_t *) malloc(sizeof(greymap_t));
   if (!gm) {
@@ -34,7 +42,7 @@ greymap_t *gm_new(int w, int h) {
   }
   gm->w = w;
   gm->h = h;
-  gm->map = (signed short int *) malloc(w*h*sizeof(signed short int));
+  gm->map = (signed short int *) malloc(size);
   if (!gm->map) {
     free(gm);
     return NULL;
@@ -537,11 +545,17 @@ static int gm_readbody_bmp(FILE *f, greymap_t **gmp) {
       TRY(bmp_readint(f, 4, &bmpinfo.BlueMask));
       TRY(bmp_readint(f, 4, &bmpinfo.AlphaMask));
     }
-    if ((signed int)bmpinfo.h < 0) {
-      bmpinfo.h = -bmpinfo.h;
+    if (bmpinfo.w > 0x7fffffff) {
+      goto format_error;
+    }
+    if (bmpinfo.h > 0x7fffffff) {
+      bmpinfo.h = (-bmpinfo.h) & 0xffffffff;
       bmpinfo.topdown = 1;
     } else {
       bmpinfo.topdown = 0;
+    }
+    if (bmpinfo.h > 0x7fffffff) {
+      goto format_error;
     }
   } else if (bmpinfo.InfoSize == 12) {
     /* old OS/2 format */
@@ -576,7 +590,7 @@ static int gm_readbody_bmp(FILE *f, greymap_t **gmp) {
 
   /* color table, present only if bmpinfo.bits <= 8. */
   if (bmpinfo.bits <= 8) {
-    coltable = (int *) malloc(bmpinfo.ncolors * sizeof(int));
+    coltable = (int *) calloc(bmpinfo.ncolors, sizeof(int));
     if (!coltable) {
       goto std_error;
     }

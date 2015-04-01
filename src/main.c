@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2013 Peter Selinger.
+/* Copyright (C) 2001-2015 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -177,8 +177,8 @@ static void license(FILE *f) {
   "GNU General Public License for more details.\n"
   "\n"
   "You should have received a copy of the GNU General Public License\n"
-  "along with this program; if not, write to the Free Software\n"
-  "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.\n"
+  "along with this program; if not, write to the Free Software Foundation\n"
+  "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.\n"
 	  );
 }
 
@@ -485,13 +485,13 @@ static void dopts(int ac, char *av[]) {
       break;
     case 'v':
     case 'V':
-      fprintf(stdout, ""POTRACE" "VERSION". Copyright (C) 2001-2013 Peter Selinger.\n");
+      fprintf(stdout, ""POTRACE" "VERSION". Copyright (C) 2001-2015 Peter Selinger.\n");
       fprintf(stdout, "Library version: %s\n", potrace_version());
       show_defaults(stdout);
       exit(0);
       break;
     case 'l':
-      fprintf(stdout, ""POTRACE" "VERSION". Copyright (C) 2001-2013 Peter Selinger.\n\n");
+      fprintf(stdout, ""POTRACE" "VERSION". Copyright (C) 2001-2015 Peter Selinger.\n\n");
       license(stdout);
       exit(0);
       break;

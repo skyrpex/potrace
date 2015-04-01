@@ -1,5 +1,19 @@
 ChangeLog
 
+v1.12 2015/03/24
+	(2015/03/20) PS1 - fixed memory overflow bug triggered by very
+	large bitmaps. Fixes RedHat bug #955808 reported by Vincent Danen
+	and Debian bug #778646 reported by Moritz Muehlenhoff.
+	(2014/09/06) PS1 - test suite: added binary-check, to check that
+	files are written in binary mode. Mostly relevant on Windows.
+	(2014/09/06) PS1 - portability: fixed potential binary file mode
+	bug on MinGW64.
+	(2014/03/30) PS1 - man pages: fixed leading blank page with
+	groff -man -Tps.
+	(2013/12/29) PS1 - portability: made regular expressions in test
+	suite POSIX compliant, reported by Ben Bullock.
+	(2013/05/14) PS1 - distribution: removed libtool from distribution.
+
 v1.11 2013/02/19
 	(2013/02/10) PS1 - bitops.c: added "cc" as a clobbered register.
 	(2012/09/13) PS1 - GeoJSON backend: -u option affects rounding,
@@ -200,7 +214,7 @@ v1.4 2004/03/06
 	be more robust against spaces in filenames etc.
 	(2004/01/17) PS1 - test suite and ztops.c: respect TEMPDIR
 	environment variable, if set.
-	
+
 v1.3 2004/01/15
 	(2004/01/14) PS1 - test suite: adjusted tolerances.
 	(2004/01/13) PS1 - when reading a bitmap of width or height 0,
@@ -281,8 +295,8 @@ v1.2 2003/12/23
 	(2003/08/20) PS1 - fixed bug in parsing command line options: long
 	options --cleartext, --level2, --level3 did not work properly.
 	Thanks to George Williams for reporting this bug.
-	
-v1.1 2003/08/18	
+
+v1.1 2003/08/18
 	(2003/08/17) PS1 - replaced calc_lon algorithm by a faster
 	implementation. This results in speedups of up to factor 3.3 for
 	certain large input files.
@@ -314,8 +328,8 @@ v1.1 2003/08/18
 	(2003/08/12) PS1 - added README.win
 	(2003/08/12) PS1 - autoconf: fixed bug #787182: added non-standard
 	compile time options to help message for ./configure script
-	
-v1.0 2003/08/10	
+
+v1.0 2003/08/10
 	(2003/08/10) PS1 - added file i/o code
 	(2003/08/08) PS1 - optimized number of times the penalty3 function
 	is called. Speedups of factor 2.7 were observed on large files.

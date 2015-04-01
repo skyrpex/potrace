@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2013 Peter Selinger.
+/* Copyright (C) 2001-2015 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -304,7 +304,7 @@ int page_svg(FILE *fout, potrace_path_t *plist, imginfo_t *imginfo) {
 
   /* metadata: creator */
   fprintf(fout, "<metadata>\n");
-  fprintf(fout, "Created by "POTRACE" "VERSION", written by Peter Selinger 2001-2013\n");
+  fprintf(fout, "Created by "POTRACE" "VERSION", written by Peter Selinger 2001-2015\n");
   fprintf(fout, "</metadata>\n");
 
   /* use a "group" tag to establish coordinate system and style */

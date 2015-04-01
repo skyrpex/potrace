@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2013 Peter Selinger.
+/* Copyright (C) 2001-2015 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -22,8 +22,8 @@
 #include "config.h"
 #endif
 
-#define SAFE_MALLOC(var, n, typ) \
-  if ((var = (typ *)malloc((n)*sizeof(typ))) == NULL) goto malloc_error 
+#define SAFE_CALLOC(var, n, typ) \
+  if ((var = (typ *)calloc(n, sizeof(typ))) == NULL) goto calloc_error 
 
 /* structure to hold command line options */
 struct info_s {
@@ -258,7 +258,7 @@ static void *interpolate_linear(greymap_t *gm, int s, int bilevel, double c) {
 /* same as interpolate_linear, except use cubic interpolation (slower
    and better). */
 
-/* we need this typedef so that the SAFE_MALLOC macro will work */
+/* we need this typedef so that the SAFE_CALLOC macro will work */
 typedef double double4[4];
 
 static void *interpolate_cubic(greymap_t *gm, int s, int bilevel, double c) {
@@ -272,8 +272,8 @@ static void *interpolate_cubic(greymap_t *gm, int s, int bilevel, double c) {
   greymap_t *gm_out = NULL;
   potrace_bitmap_t *bm_out = NULL;
 
-  SAFE_MALLOC(poly, s, double4);
-  SAFE_MALLOC(window, s, double4);
+  SAFE_CALLOC(poly, s, double4);
+  SAFE_CALLOC(window, s, double4);
 
   w = gm->w;
   h = gm->h;
@@ -282,14 +282,14 @@ static void *interpolate_cubic(greymap_t *gm, int s, int bilevel, double c) {
   if (bilevel) {
     bm_out = bm_new(w*s, h*s);
     if (!bm_out) {
-      goto malloc_error;
+      goto calloc_error;
     }
     bm_clear(bm_out, 0);
     c1 = c * 255;
   } else {
     gm_out = gm_new(w*s, h*s);
     if (!gm_out) {
-      goto malloc_error;
+      goto calloc_error;
     }
   }
 
@@ -361,7 +361,7 @@ static void *interpolate_cubic(greymap_t *gm, int s, int bilevel, double c) {
     return (void *)gm_out;
   }
 
- malloc_error:
+ calloc_error:
   free(poly);
   free(window);
   return NULL;
@@ -474,8 +474,8 @@ static int license(FILE *f) {
   "GNU General Public License for more details.\n"
   "\n"
   "You should have received a copy of the GNU General Public License\n"
-  "along with this program; if not, write to the Free Software\n"
-  "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.\n"
+  "along with this program; if not, write to the Free Software Foundation\n"
+  "Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.\n"
 	  );
   return 0;
 }
@@ -558,11 +558,11 @@ static void dopts(int ac, char *av[]) {
       exit(0);
       break;
     case 'v':
-      fprintf(stdout, ""MKBITMAP" "VERSION". Copyright (C) 2001-2013 Peter Selinger.\n");
+      fprintf(stdout, ""MKBITMAP" "VERSION". Copyright (C) 2001-2015 Peter Selinger.\n");
       exit(0);
       break;
     case 'l':
-      fprintf(stdout, ""MKBITMAP" "VERSION". Copyright (C) 2001-2013 Peter Selinger.\n\n");
+      fprintf(stdout, ""MKBITMAP" "VERSION". Copyright (C) 2001-2015 Peter Selinger.\n\n");
       license(stdout);
       exit(0);
       break;

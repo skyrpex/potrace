@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2013 Peter Selinger.
+/* Copyright (C) 2001-2015 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -242,7 +242,7 @@ int page_dxf(FILE *fout, potrace_path_t *plist, imginfo_t *imginfo) {
   t.y[0] = imginfo->trans.y[0];
   t.y[1] = imginfo->trans.y[1];
 
-  ship_comment(fout, "DXF data, created by "POTRACE" "VERSION", written by Peter Selinger 2001-2013");
+  ship_comment(fout, "DXF data, created by "POTRACE" "VERSION", written by Peter Selinger 2001-2015");
 
   /* header section */
   ship_section(fout, "HEADER");

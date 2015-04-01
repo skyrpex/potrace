@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2013 Peter Selinger.
+/* Copyright (C) 2001-2015 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -478,11 +478,17 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
       TRY(bmp_readint(f, 4, &bmpinfo.BlueMask));
       TRY(bmp_readint(f, 4, &bmpinfo.AlphaMask));
     }
-    if ((signed int)bmpinfo.h < 0) {
-      bmpinfo.h = -bmpinfo.h;
+    if (bmpinfo.w > 0x7fffffff) {
+      goto format_error;
+    }
+    if (bmpinfo.h > 0x7fffffff) {
+      bmpinfo.h = (-bmpinfo.h) & 0xffffffff;
       bmpinfo.topdown = 1;
     } else {
       bmpinfo.topdown = 0;
+    }
+    if (bmpinfo.h > 0x7fffffff) {
+      goto format_error;
     }
   } else if (bmpinfo.InfoSize == 12) {
     /* old OS/2 format */
@@ -517,7 +523,7 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
 
   /* color table, present only if bmpinfo.bits <= 8. */
   if (bmpinfo.bits <= 8) {
-    coltable = (int *) malloc(bmpinfo.ncolors * sizeof(int));
+    coltable = (int *) calloc(bmpinfo.ncolors, sizeof(int));
     if (!coltable) {
       goto std_error;
     }

@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2013 Peter Selinger.
+/* Copyright (C) 2001-2015 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -215,7 +215,7 @@ int page_xfig(FILE *fout, potrace_path_t *plist, imginfo_t *imginfo) {
 
   /* header */
   fprintf(fout, "#FIG 3.2\n");
-  fprintf(fout, "#created by "POTRACE" "VERSION", written by Peter Selinger 2001-2013\n");
+  fprintf(fout, "#created by "POTRACE" "VERSION", written by Peter Selinger 2001-2015\n");
   fprintf(fout, "Portrait\n");
   fprintf(fout, "Center\n");
   fprintf(fout, "Inches\n");

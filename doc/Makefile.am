@@ -7,7 +7,7 @@ EPSFILES = potracelib-fig1a.eps potracelib-fig1b.eps			\
  potracelib-fig7-10.eps potracelib-fig7-12.eps potracelib-fig7-13.eps	\
  potracelib-fig8.eps
 
-EXTRA_DIST = potracelib.tex ${EPSFILES}
+EXTRA_DIST = potracelib.tex ${EPSFILES} dictionary.txt
 dist_doc_DATA = placement.pdf
 
 potracelib.dvi: potracelib.tex ${EPSFILES}
@@ -22,5 +22,8 @@ potracelib.ps: potracelib-1up.ps
 
 potracelib.pdf: potracelib.ps
 	ps2pdf $<
+
+spellcheck: potrace.1.in potracelib.tex
+	ispell -d american -p ./dictionary.txt $^
 
 MOSTLYCLEANFILES = potracelib.dvi potracelib-1up.ps potracelib.ps potracelib.pdf

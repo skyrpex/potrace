@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Copyright (C) 2001-2013 Peter Selinger.
+# Copyright (C) 2001-2015 Peter Selinger.
 # This file is part of Potrace. It is free software and it is covered
 # by the GNU General Public License. See the file COPYING for details.
 
@@ -65,7 +65,7 @@ getsize () {
 filetest () {
     F="$1"
     T="$2"
-    head -n 1 "$F" | egrep "$T"
+    head -n 1 "$F" | grep "$T"
 }
 
 # check that the file size is within given bounds
@@ -143,12 +143,12 @@ action sizetest "$TMP1" 16800 18000
 
 # test svg
 action $POTRACE -b svg -o "$TMP1" "$DATA"
-action filetest "$TMP1" '^<\?xml version="1.0" standalone="no"\?>$' > /dev/null
+action filetest "$TMP1" '^<?xml version="1.0" standalone="no"?>$' > /dev/null
 action sizetest "$TMP1" 12000 13850
 
 # test svg debugging backend
 action $POTRACE -b svg -d1 -o "$TMP1" "$DATA"
-action filetest "$TMP1" '^<\?xml version="1.0" standalone="no"\?>$' > /dev/null
+action filetest "$TMP1" '^<?xml version="1.0" standalone="no"?>$' > /dev/null
 action sizetest "$TMP1" 21050 21500
 
 # test pgm
@@ -158,7 +158,7 @@ action sizetest "$TMP1" 45300 45400
 
 # test gimppath
 action $POTRACE -b gimp -o "$TMP1" "$DATA"
-action filetest "$TMP1" '^<\?xml version="1.0" standalone="no"\?>$' > /dev/null
+action filetest "$TMP1" '^<?xml version="1.0" standalone="no"?>$' > /dev/null
 action sizetest "$TMP1" 11000 12500
 
 # test xfig

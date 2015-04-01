@@ -1,4 +1,4 @@
-dnl Copyright (C) 2001-2013 Peter Selinger.
+dnl Copyright (C) 2001-2015 Peter Selinger.
 dnl This file is part of Potrace. It is free software and it is covered
 dnl by the GNU General Public License. See the file COPYING for details.
 
@@ -6,13 +6,13 @@ dnl Process this file with autoconf to produce a configure script.
 
 dnl ----------------------------------------------------------------------
 dnl Package info
-AC_INIT([potrace],[1.11],[selinger at users.sourceforge.net])
+AC_INIT([potrace],[1.12],[selinger at users.sourceforge.net])
 AC_CONFIG_SRCDIR(src/trace.c)
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADER(config.h)
 AC_CONFIG_MACRO_DIR([m4])
 
-DATE="February 2013"
+DATE="March 2015"
 
 dnl ----------------------------------------------------------------------
 dnl The names of the installed executables are defined here, but
@@ -264,7 +264,7 @@ AC_SUBST(POTRACE)
 AC_SUBST(MKBITMAP)
 AC_SUBST(EXTRA_OBJS)
 AC_SUBST(EXTRA_LIBS)
-AC_SUBST(INCLUDES)
+AC_SUBST(AM_CPPFLAGS)
 AC_SUBST(POTRACELIB_VERSION)
 
 dnl ----------------------------------------------------------------------

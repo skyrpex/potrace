@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2013 Peter Selinger.
+/* Copyright (C) 2001-2015 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -283,7 +283,7 @@ int init_pdf(FILE *fout)
 	intarray_set(&xref, nxref++, outcount);
 	shipclear("2 0 obj\n"
 		"<</Creator"
-		"("POTRACE" "VERSION", written by Peter Selinger 2001-2013)>>\n"
+		"("POTRACE" "VERSION", written by Peter Selinger 2001-2015)>>\n"
 		"endobj\n");
 
 	/* delay obj #3 (pages) until end */
