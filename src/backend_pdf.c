@@ -6,6 +6,10 @@
 /* The PDF backend of Potrace. Stream compression is optionally
 	supplied via the functions in flate.c. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
@@ -18,10 +22,6 @@
 #include "lists.h"
 #include "potracelib.h"
 #include "auxiliary.h"
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 typedef int color_t;
 

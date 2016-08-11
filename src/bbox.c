@@ -4,6 +4,10 @@
 
 /* figure out the true bounding box of a vector image */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <math.h>
 #include <stdlib.h>
 

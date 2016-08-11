@@ -7,6 +7,12 @@
    filter (evening out background gradients), lowpass filter
    (smoothing foreground details), interpolated scaling, inversion. */
 
+#define _XOPEN_SOURCE 500
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
@@ -17,10 +23,6 @@
 #include "greymap.h"
 #include "bitmap_io.h"
 #include "platform.h"
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 #define SAFE_CALLOC(var, n, typ) \
   if ((var = (typ *)calloc(n, sizeof(typ))) == NULL) goto calloc_error 

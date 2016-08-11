@@ -8,6 +8,10 @@
    convenience, as the same could be achieved by piping the EPS output
    through ghostscript. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <math.h>
 
 #include "backend_pgm.h"
@@ -18,10 +22,6 @@
 #include "main.h"
 #include "auxiliary.h"
 #include "trans.h"
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846

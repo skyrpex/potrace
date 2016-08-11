@@ -1,3 +1,13 @@
+October 22, 2015: Release 1.13
+
+ Some critical bugs in the processing of BMP files were fixed. These
+ bugs allowed the program to be crashed, or potentially to be abused
+ in other ways, by feeding it specially crafted BMP files. Thanks to
+ Tomasz Buchert and Agostino Sarubbo for reporting these bugs.
+ Portability was improved for C99 and for MSVC++. Thanks to Peter
+ Breitenlohner, Nelson Beebe, and Martin Gieseking for reporting
+ portability issues.
+
 March 24, 2015: Release 1.12
 
  Fixed memory overflow bug triggered by very large bitmaps. Fixed

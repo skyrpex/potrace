@@ -6,10 +6,15 @@
 /* Routines for manipulating greymaps, including reading pgm files. We
    only deal with greymaps of depth 8 bits. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <errno.h>
+#include <stddef.h>
 
 #include "greymap.h"
 #include "bitops.h"
@@ -28,7 +33,7 @@ static int gm_readbody_bmp(FILE *f, greymap_t **gmp);
    Assumes w, h >= 0. */
 greymap_t *gm_new(int w, int h) {
   greymap_t *gm;
-  ssize_t size = (ssize_t)w * (ssize_t)h * (ssize_t)sizeof(signed short int);
+  ptrdiff_t size = (ptrdiff_t)w * (ptrdiff_t)h * (ptrdiff_t)sizeof(signed short int);
   
   /* check for overflow error */
   if (size < 0 || size / w / h != sizeof(signed short int)) {

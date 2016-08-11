@@ -5,6 +5,10 @@
 /* The GeoJSON backend of Potrace. */
 /* Written 2012 by Christoph Hormann <chris_hormann@gmx.de> */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
@@ -16,10 +20,6 @@
 #include "backend_geojson.h"
 #include "lists.h"
 #include "auxiliary.h"
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 /* ---------------------------------------------------------------------- */
 /* auxiliary */

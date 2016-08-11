@@ -1,5 +1,19 @@
 ChangeLog
 
+v1.13 2015/10/22
+	(2015/07/18) PS1 - fixed heap overflows, null pointer dereference
+	bugs and a memory leak. Reported by Agostino Sarubbo.
+	(2015/05/17) PS1 - man page: show which backends are dimension
+	based, and state more clearly that svg backend defaults to 72dpi.
+	(2015/04/11) PS1 - portability: ssize_t not supported on some
+	systems; use ptrdiff_t instead. Reported by Martin Gieseking.
+	(2015/03/28) PS1 - portability: added missing #includes for c99,
+	reported by Nelson Beebe.
+	(2015/03/27) PS1 - include config.h before other header files,
+	reported by Peter Breitenlohner.
+	(2015/03/26) PS1 - fixed division by zero bug triggered by bitmap
+	of dimension 1x0. Reported by Tomasz Buchert.
+
 v1.12 2015/03/24
 	(2015/03/20) PS1 - fixed memory overflow bug triggered by very
 	large bitmaps. Fixes RedHat bug #955808 reported by Vincent Danen

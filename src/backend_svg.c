@@ -5,6 +5,10 @@
 
 /* The SVG backend of Potrace. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
@@ -16,10 +20,6 @@
 #include "backend_svg.h"
 #include "lists.h"
 #include "auxiliary.h"
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 /* ---------------------------------------------------------------------- */
 /* path-drawing auxiliary functions */

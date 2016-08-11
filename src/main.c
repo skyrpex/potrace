@@ -2,11 +2,17 @@
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
+#define _XOPEN_SOURCE 500
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#include <strings.h>
 #include <getopt.h>
 #include <math.h>
 
@@ -26,10 +32,6 @@
 #include "auxiliary.h"
 #include "progress_bar.h"
 #include "trans.h"
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846

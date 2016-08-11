@@ -12,13 +12,13 @@ potrace \- transform bitmaps into vector graphics.
 .SH DESCRIPTION
 
 \fBpotrace\fP is a tool for tracing a bitmap, which means,
-transforming a bitmap into a smooth, scalable image. The input is a
+transforming a bitmap into a smooth, scalable image.  The input is a
 bitmap, which means, a pixel-based image composed of the two colors
-black and white only. The default output is an encapsulated PostScript
-file (EPS). A typical use is to create EPS files from scanned data,
-such as company or university logos, handwritten notes, etc. The
-resulting image is not "jaggy" like a bitmap, but smooth. It can then
-be rendered at any resolution.
+black and white only. The output is EPS, PDF, SVG, or one of a number
+of other vector formats. A typical use is to create vector graphics
+from scanned data, such as company or university logos, handwritten
+notes, etc. The resulting image is not "jaggy" like a bitmap, but
+smooth. It can then be rendered at any resolution.
 
 \fBpotrace\fP can read bitmaps in the following formats: PBM, PGM, PPM
 (collectively known as PNM, see pnm(5)), as well as BMP (Windows and
@@ -93,25 +93,28 @@ unambiguous. Backend names are case insensitive.
 .TP
 .B -e, --eps, -b eps, --backend eps
 EPS backend (default). The output is an encapsulated PostScript
-file. This is a single-page, variable-sized backend.
+file. This is a single-page, variable-sized, dimension-based backend.
 .TP
 .B -p, --postscript, -b ps, --backend ps
 PostScript backend. The output is a PostScript file. This is a
-multi-page, fixed-size backend. If the input consists of multiple
-bitmaps, they are each rendered on a separate page.
+multi-page, fixed-size, dimension-based backend. If the input consists
+of multiple bitmaps, they are each rendered on a separate page.
 .TP
 .B -b pdf, --backend pdf
 PDF backend. The output is a file in the Portable Document Format.  If
 the input consists of multiple bitmaps, they are each rendered on a
-separate page. This is a multi-page, variable-sized, backend.
+separate page. This is a multi-page, variable-sized, dimension-based
+backend.
 .TP
 .B -b pdfpage, --backend pdfpage
 The PDFPage backend is like the PDF backend, except that it is
 fixed-size like the PostScript backend.
 .TP
 .B -s, --svg, -b svg, --backend svg
-SVG backend. The output is a Scalable Vector Graphics (SVG) file. 
-This is a single-page, variable-sized backend.
+SVG backend. The output is a Scalable Vector Graphics (SVG) file.
+This is a single-page, variable-sized, dimension-based backend. Note
+that unless the \fB-r\fP option is given, the resolution of the input
+bitmap is assumed to be 72dpi.
 .TP
 .B -b dxf, --backend dxf
 DXF backend. The output is a file in the Drawing Interchange Format
@@ -144,8 +147,9 @@ the SVG backend are: the \fB--opaque\fP option has no effect, the
 pixel-based. This is a single-page, variable-sized, pixel-based backend.
 .TP
 .B -b xfig, --backend xfig
-XFig backend. The output is a file in the XFig format.  Note that XFig
-uses X-splines instead of Bezier curves, thus it is not possible to
+XFig backend. This is a single-page, fixed-size, dimension-based
+backend. The output is a file in the XFig format.  Note that XFig uses
+X-splines instead of Bezier curves, thus it is not possible to
 translate the output of \fBpotrace\fP into the XFig format with
 absolute accuracy. This backend does a reasonable approximation using
 two control points for each Bezier curve segment. The \fB-u\fP option

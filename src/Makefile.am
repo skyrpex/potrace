@@ -42,7 +42,7 @@ libsources = curve.c curve.h trace.c trace.h decompose.c		\
 lib_LTLIBRARIES = $(INSTLIBS)
 EXTRA_LTLIBRARIES = libpotrace.la
 libpotrace_la_SOURCES = $(libsources)
-libpotrace_la_LDFLAGS = -version-info 0:2:0 -rpath '$(libdir)' \
+libpotrace_la_LDFLAGS = -version-info 0:3:0 -rpath '$(libdir)' \
  -export-symbols $(srcdir)/libpotrace-export.sym -no-undefined
 libpotrace_la_LIBADD = -lm
 MOSTLYCLEANFILES = libpotrace.la

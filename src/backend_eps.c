@@ -8,6 +8,12 @@
    output. Postscript compression is optionally supplied via the
    functions in flate.c. */
 
+#define _XOPEN_SOURCE 500
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
@@ -21,10 +27,6 @@
 #include "flate.h"
 #include "lists.h"
 #include "auxiliary.h"
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 #define SAFE_CALLOC(var, n, typ) \
   if ((var = (typ *)calloc(n, sizeof(typ))) == NULL) goto calloc_error 

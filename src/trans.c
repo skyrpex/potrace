@@ -4,6 +4,10 @@
 
 /* calculations with coordinate transformations and bounding boxes */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <math.h>
 #include <string.h>
 

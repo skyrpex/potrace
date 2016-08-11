@@ -2,6 +2,10 @@
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -10,10 +14,6 @@
 #include "decompose.h"
 #include "trace.h"
 #include "progress.h"
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 /* default parameters */
 static const potrace_param_t param_default = {

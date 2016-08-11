@@ -5,6 +5,10 @@
 /* functions to render a progress bar for main.c. We provide a
    standard and a simplified progress bar. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>

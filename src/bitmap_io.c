@@ -5,6 +5,10 @@
 
 /* Routines for manipulating bitmaps, including reading pbm files. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdio.h>
 
 #include "bitmap.h"
@@ -424,6 +428,9 @@ static int bmp_forward(FILE *f, int pos) {
 /* correct y-coordinate for top-down format */
 #define ycorr(y) (bmpinfo.topdown ? bmpinfo.h-1-y : y)
 
+/* safe colortable access */
+#define COLTABLE(c) ((c) < bmpinfo.ncolors ? coltable[(c)] : 0)
+
 /* read BMP stream after magic number. Return values as for bm_read.
    We choose to be as permissive as possible, since there are many
    programs out there which produce BMP. For instance, ppmtobmp can
@@ -506,6 +513,10 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
 
   if (bmpinfo.comp == 3 && bmpinfo.InfoSize < 108) {
     /* bitfield feature is only understood with V4 and V5 format */
+    goto format_error;
+  }
+
+  if (bmpinfo.comp > 3 || bmpinfo.bits > 32) {
     goto format_error;
   }
 
@@ -598,7 +609,7 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
 	b = bitbuf >> (INTBITS - bmpinfo.bits);
 	bitbuf <<= bmpinfo.bits;
 	n -= bmpinfo.bits;
-	BM_UPUT(bm, x, ycorr(y), coltable[b]);
+	BM_UPUT(bm, x, ycorr(y), COLTABLE(b));
       }
       TRY(bmp_pad(f));
     }
@@ -643,13 +654,14 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
   case 0x204:  /* 4-bit runlength compressed encoding (RLE4) */
     x = 0;
     y = 0;
+
     while (1) {
       TRY_EOF(bmp_readint(f, 1, &b)); /* opcode */
       TRY_EOF(bmp_readint(f, 1, &c)); /* argument */
       if (b>0) {
 	/* repeat count */
-	col[0] = coltable[(c>>4) & 0xf];
-	col[1] = coltable[c & 0xf];
+	col[0] = COLTABLE((c>>4) & 0xf);
+	col[1] = COLTABLE(c & 0xf);
 	for (i=0; i<b && x<bmpinfo.w; i++) {
 	  if (x>=bmpinfo.w) {
 	    x=0;
@@ -687,7 +699,7 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
 	  if (y>=bmpinfo.h) {
 	    break;
 	  }
-	  BM_PUT(bm, x, ycorr(y), coltable[(b>>(4-4*(i&1))) & 0xf]);
+	  BM_PUT(bm, x, ycorr(y), COLTABLE((b>>(4-4*(i&1))) & 0xf));
 	  x++;
 	}
 	if ((c+1) & 2) {
@@ -714,7 +726,7 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
 	  if (y>=bmpinfo.h) {
 	    break;
 	  }
-	  BM_UPUT(bm, x, ycorr(y), coltable[c]);
+	  BM_UPUT(bm, x, ycorr(y), COLTABLE(c));
 	  x++;
 	}
       } else if (c == 0) {
@@ -741,7 +753,7 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
           if (y>=bmpinfo.h) {
             break;
           }
-	  BM_PUT(bm, x, ycorr(y), coltable[b]);
+	  BM_PUT(bm, x, ycorr(y), COLTABLE(b));
 	  x++;
 	}
 	if (c & 1) {
@@ -770,7 +782,7 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
  format_error:
  try_error:
   free(coltable);
-  free(bm);
+  bm_free(bm);
   if (!bm_read_error) {
     bm_read_error = "invalid bmp file";
   }
@@ -778,7 +790,7 @@ static int bm_readbody_bmp(FILE *f, double threshold, potrace_bitmap_t **bmp) {
 
  std_error:
   free(coltable);
-  free(bm);
+  bm_free(bm);
   return -1;
 }
 

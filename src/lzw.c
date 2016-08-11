@@ -5,6 +5,10 @@
 
 /* code for adaptive LZW compression, as used in PostScript. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>

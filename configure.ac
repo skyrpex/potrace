@@ -6,13 +6,13 @@ dnl Process this file with autoconf to produce a configure script.
 
 dnl ----------------------------------------------------------------------
 dnl Package info
-AC_INIT([potrace],[1.12],[selinger at users.sourceforge.net])
+AC_INIT([potrace],[1.13],[selinger at users.sourceforge.net])
 AC_CONFIG_SRCDIR(src/trace.c)
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADER(config.h)
 AC_CONFIG_MACRO_DIR([m4])
 
-DATE="March 2015"
+DATE="October 2015"
 
 dnl ----------------------------------------------------------------------
 dnl The names of the installed executables are defined here, but

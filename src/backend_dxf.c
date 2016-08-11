@@ -4,6 +4,10 @@
 
 /* The DXF backend of Potrace. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
@@ -15,10 +19,6 @@
 #include "lists.h"
 #include "auxiliary.h"
 #include "trans.h"
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
