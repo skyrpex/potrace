@@ -273,6 +273,7 @@ LIBTOOL = @LIBTOOL@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
 MKBITMAP = @MKBITMAP@
@@ -343,6 +344,7 @@ pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
+runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
@@ -381,7 +383,7 @@ libsources = curve.c curve.h trace.c trace.h decompose.c		\
 lib_LTLIBRARIES = $(INSTLIBS)
 EXTRA_LTLIBRARIES = libpotrace.la
 libpotrace_la_SOURCES = $(libsources)
-libpotrace_la_LDFLAGS = -version-info 0:3:0 -rpath '$(libdir)' \
+libpotrace_la_LDFLAGS = -version-info 0:4:0 -rpath '$(libdir)' \
  -export-symbols $(srcdir)/libpotrace-export.sym -no-undefined
 
 libpotrace_la_LIBADD = -lm

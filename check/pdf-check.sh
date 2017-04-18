@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Copyright (C) 2001-2015 Peter Selinger.
+# Copyright (C) 2001-2017 Peter Selinger.
 # This file is part of Potrace. It is free software and it is covered
 # by the GNU General Public License. See the file COPYING for details.
 
@@ -27,13 +27,14 @@ echo "Checking PDF output..." >& 2
 NAME=`basename "$0"`
 
 POTRACE="${CHECK_POTRACE:-../src/potrace$EXEEXT --progress}"
+DATADIR="$srcdir/data"
 PGMDIFF="./pgmdiff$EXEEXT"
 TMPDIR="${TEMPDIR:-/tmp}"
 TMP1=`mktemp "$TMPDIR/$NAME-1.XXXXXX"`
 TMP2=`mktemp "$TMPDIR/$NAME-2.XXXXXX"`
-DATA="$srcdir/data1.pbm"
-REFDATA="$srcdir/data1.pbm.gs"
-REFDATAROT="$srcdir/data1.pbm.rot"
+DATA="$DATADIR/data1.pbm"
+REFDATA="$DATADIR/data1.pbm.gs"
+REFDATAROT="$DATADIR/data1.pbm.rot"
 
 # run the command, expecting return value 0
 action () {

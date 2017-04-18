@@ -1,4 +1,4 @@
-% Copyright (C) 2001-2015 Peter Selinger.
+% Copyright (C) 2001-2017 Peter Selinger.
 % This file is part of Potrace. It is licensed under the GNU General
 % Public License. See the file COPYING for details.
 
@@ -17,7 +17,7 @@
 \begin{document}
 \maketitle
 
-\noindent {\it Copyright \copyright\ 2001-2015 Peter Selinger.  
+\noindent {\it Copyright \copyright\ 2001-2017 Peter Selinger.  
   This file is part of Potrace. It is licensed under the GNU General
   Public License. See the file COPYING for details. }
 
@@ -750,6 +750,10 @@ initialized by Potrace are freed, not any fields set by the
 application itself (such as \verb!progress.data!).
 
 \subsection{potrace\_version()}\label{5e}
+
+\begin{verbatim}
+const char *potrace_version();
+\end{verbatim}
 
 This function returns a static human-readable text string identifying
 this version of potracelib.

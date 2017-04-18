@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Copyright (C) 2001-2015 Peter Selinger.
+# Copyright (C) 2001-2017 Peter Selinger.
 # This file is part of Potrace. It is free software and it is covered
 # by the GNU General Public License. See the file COPYING for details.
 
@@ -21,11 +21,12 @@ NAME=`basename "$0"`
 
 MKBITMAP="${CHECK_MKBITMAP:-../src/mkbitmap$EXEEXT}"
 POTRACE="${CHECK_POTRACE:-../src/potrace$EXEEXT}"
+DATADIR="$srcdir/data"
 CHECKBIN="./checkbin$EXEEXT"
 TMPDIR="${TEMPDIR:-/tmp}"
 TMP1=`mktemp "$TMPDIR/$NAME-1.XXXXXX"`
-DATA1="$srcdir/data1.ppm"
-DATA2="$srcdir/data2.ppm"
+DATA1="$DATADIR/data1.ppm"
+DATA2="$DATADIR/data2.ppm"
 
 action () {
     "$@"

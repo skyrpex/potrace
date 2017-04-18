@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Copyright (C) 2001-2015 Peter Selinger.
+# Copyright (C) 2001-2017 Peter Selinger.
 # This file is part of Potrace. It is free software and it is covered
 # by the GNU General Public License. See the file COPYING for details.
 
@@ -27,9 +27,10 @@ fi
 NAME=`basename "$0"`
 
 POTRACE="${CHECK_POTRACE:-../src/potrace$EXEEXT --progress}"
+DATADIR="$srcdir/data"
 TMPDIR="${TEMPDIR:-/tmp}"
 TMP1=`mktemp "$TMPDIR/$NAME-1.XXXXXX"`
-DATA="$srcdir/data1.pbm"
+DATA="$DATADIR/data1.pbm"
 DATASIZE=5956
 
 # run the command, expecting return value 0

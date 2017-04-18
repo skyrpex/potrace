@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Copyright (C) 2001-2015 Peter Selinger.
+# Copyright (C) 2001-2017 Peter Selinger.
 # This file is part of Potrace. It is free software and it is covered
 # by the GNU General Public License. See the file COPYING for details.
 
@@ -19,14 +19,16 @@ fi
 NAME=`basename "$0"`
 
 POTRACE="${CHECK_POTRACE:-../src/potrace$EXEEXT --progress}"
+DATADIR="$srcdir/data"
 PGMDIFF="./pgmdiff$EXEEXT"
 TMPDIR="${TEMPDIR:-/tmp}"
 TMP1=`mktemp "$TMPDIR/$NAME-1.XXXXXX"`
-DATA="$srcdir/data1.pbm"
-REFDATA="$srcdir/data1-out.pgm"
-REFDATAROT="$srcdir/data1.pgm.rot"
-EDATA="$srcdir/data3.pgm"
-EREFDATA="$srcdir/data3.pgm"
+DATA="$DATADIR/data1.pbm"
+REFDATA="$DATADIR/data1-out.pgm"
+REFDATAROT="$DATADIR/data1.pgm.rot"
+REFDATAINV="$DATADIR/data1.pgm.inv"
+EDATA="$DATADIR/data3.pgm"
+EREFDATA="$DATADIR/data3.pgm"
 
 action () {
     "$@"
@@ -63,6 +65,9 @@ actiondiff "$TMP1" "$REFDATA" 50
 
 action $POTRACE -n -g -A 160 -o "$TMP1" "$DATA"
 actiondiff "$TMP1" "$REFDATAROT" 50
+
+action $POTRACE -n -g -i -o "$TMP1" "$DATA"
+actiondiff "$TMP1" "$REFDATAINV" 50
 
 # check that potrace works on an empty bitmap
 action $POTRACE -g -o "$TMP1" "$EDATA"

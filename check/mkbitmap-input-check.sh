@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Copyright (C) 2001-2015 Peter Selinger.
+# Copyright (C) 2001-2017 Peter Selinger.
 # This file is part of Potrace. It is free software and it is covered
 # by the GNU General Public License. See the file COPYING for details.
 
@@ -18,6 +18,7 @@ fi
 NAME=`basename "$0"`
 
 MKBITMAP="${CHECK_MKBITMAP:-../src/mkbitmap$EXEEXT}"
+DATADIR="$srcdir/data"
 TMPDIR="${TEMPDIR:-/tmp}"
 TMP1=`mktemp "$TMPDIR/$NAME-1.XXXXXX"`
 TMP2=`mktemp "$TMPDIR/$NAME-2.XXXXXX"`
@@ -35,11 +36,11 @@ action () {
 alias action="LINE=\$LINENO; action"
 
 dofiles() {
-  action $MKBITMAP -o "$TMP1" "$srcdir/$1"
+  action $MKBITMAP -o "$TMP1" "$DATADIR/$1"
   shift
 
   for i in "$@"; do
-      action $MKBITMAP -o "$TMP2" "$srcdir/$i"
+      action $MKBITMAP -o "$TMP2" "$DATADIR/$i"
       action diff "$TMP1" "$TMP2" > /dev/null
       action rm -f "$TMP2"
   done
