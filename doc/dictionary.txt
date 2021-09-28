@@ -10,7 +10,6 @@ BMP
 bottommargin
 ca
 cartesian
-ccrypt
 cleartext
 CNC
 despeckle

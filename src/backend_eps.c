@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2017 Peter Selinger.
+/* Copyright (C) 2001-2019 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -7,14 +7,6 @@
    output, and different kinds of graphical debugging
    output. Postscript compression is optionally supplied via the
    functions in flate.c. */
-
-#ifndef _POSIX_C_SOURCE
-#define _POSIX_C_SOURCE 200809L
-#endif
-
-#ifndef _NETBSD_SOURCE
-#define _NETBSD_SOURCE 1
-#endif
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -706,7 +698,7 @@ static int eps_init(imginfo_t *imginfo) {
   char *c0, *c1;
 
   shipcom("%%!PS-Adobe-3.0 EPSF-3.0\n");
-  shipcom("%%%%Creator: " POTRACE " " VERSION ", written by Peter Selinger 2001-2017\n");
+  shipcom("%%%%Creator: " POTRACE " " VERSION ", written by Peter Selinger 2001-2019\n");
   shipcom("%%%%LanguageLevel: %d\n", info.pslevel);
   shipcom("%%%%BoundingBox: 0 0 %.0f %.0f\n", 
 	  ceil(imginfo->trans.bb[0]+imginfo->lmar+imginfo->rmar),
@@ -775,7 +767,7 @@ int init_ps(FILE *fout) {
   eps_callbacks(fout);
 
   shipcom("%%!PS-Adobe-3.0\n");
-  shipcom("%%%%Creator: " POTRACE " " VERSION ", written by Peter Selinger 2001-2017\n");
+  shipcom("%%%%Creator: " POTRACE " " VERSION ", written by Peter Selinger 2001-2019\n");
   shipcom("%%%%LanguageLevel: %d\n", info.pslevel);
   shipcom("%%%%BoundingBox: 0 0 %d %d\n", info.paperwidth, info.paperheight);
   shipcom("%%%%Pages: (atend)\n");

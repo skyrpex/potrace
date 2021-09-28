@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2017 Peter Selinger.
+/* Copyright (C) 2001-2019 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -15,6 +15,9 @@
 #include <math.h>
 #include <errno.h>
 #include <stddef.h>
+#ifdef HAVE_INTTYPES_H
+#include <inttypes.h>
+#endif
 
 #include "greymap.h"
 #include "bitops.h"
@@ -43,10 +46,10 @@ static inline ptrdiff_t getsize(int dy, int h) {
     dy = -dy;
   }
   
-  size = (ptrdiff_t)dy * (ptrdiff_t)h * (ptrdiff_t)sizeof(gm_sample_t);
+  size = (ptrdiff_t)dy * (ptrdiff_t)h * (ptrdiff_t)GM_SAMPLESIZE;
 
   /* check for overflow error */
-  if (size < 0 || (h != 0 && dy != 0 && size / h / dy != sizeof(gm_sample_t))) {
+  if (size < 0 || (h != 0 && dy != 0 && size / h / dy != GM_SAMPLESIZE)) {
     return -1;
   }
 
@@ -76,7 +79,7 @@ greymap_t *gm_new(int w, int h) {
     return NULL;
   }
   if (size == 0) {
-    size = 1; /* make surecmalloc() doesn't return NULL */
+    size = GM_SAMPLESIZE; /* make sure calloc() doesn't return NULL */
   }
   
   gm = (greymap_t *) malloc(sizeof(greymap_t));
@@ -112,7 +115,7 @@ greymap_t *gm_dup(greymap_t *gm) {
     return NULL;
   }
   for (y=0; y<gm->h; y++) {
-    memcpy(gm_scanline(gm1, y), gm_scanline(gm, y), (size_t)gm1->dy * sizeof(gm_sample_t));
+    memcpy(gm_scanline(gm1, y), gm_scanline(gm, y), (size_t)gm1->dy * GM_SAMPLESIZE);
   }
   return gm1;
 }
@@ -167,7 +170,7 @@ static inline int gm_resize(greymap_t *gm, int h) {
     goto error;
   }
   if (newsize == 0) {
-    newsize = 1; /* make sure realloc() doesn't return NULL */
+    newsize = GM_SAMPLESIZE; /* make sure realloc() doesn't return NULL */
   }
   
   newbase = (gm_sample_t *)realloc(gm->base, newsize);
@@ -223,7 +226,7 @@ static int fgetc_ws(FILE *f) {
 
 static int readnum(FILE *f) {
   int c;
-  int acc;
+  uint64_t acc;
 
   /* skip whitespace and comments */
   while (1) {
@@ -249,6 +252,9 @@ static int readnum(FILE *f) {
     }
     acc *= 10;
     acc += c-'0';
+    if (acc > 0x7fffffff) {
+      return -1;
+    }
   }
   return acc;
 }

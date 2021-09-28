@@ -1,4 +1,4 @@
-## Copyright (C) 2001-2017 Peter Selinger.
+## Copyright (C) 2001-2019 Peter Selinger.
 ## This file is part of Potrace. It is free software and it is covered
 ## by the GNU General Public License. See the file COPYING for details.
 
@@ -20,11 +20,13 @@ potrace_SOURCES = main.c main.h bitmap_io.c bitmap_io.h backend_eps.c	\
  lzw.c lzw.h bitops.h auxiliary.h potracelib.h bitmap.h curve.h		\
  platform.h progress.h progress_bar.c progress_bar.h bbox.c bbox.h	\
  trans.c trans.h
+EXTRA_potrace_SOURCES = getopt.c getopt1.c include/getopt/getopt.h
 potrace_LDADD = libpotrace.la @EXTRA_OBJS@ -lm @EXTRA_LIBS@
 potrace_DEPENDENCIES = libpotrace.la @EXTRA_OBJS@
 
 mkbitmap_SOURCES = mkbitmap.c bitmap_io.c bitmap_io.h greymap.c	\
  greymap.h platform.h bitmap.h potracelib.h bitops.h
+EXTRA_mkbitmap_SOURCES = getopt.c getopt1.c include/getopt/getopt.h
 mkbitmap_LDADD = @EXTRA_OBJS@ -lm
 mkbitmap_DEPENDENCIES = @EXTRA_OBJS@
 
@@ -44,7 +46,7 @@ libsources = curve.c curve.h trace.c trace.h decompose.c		\
 lib_LTLIBRARIES = $(INSTLIBS)
 EXTRA_LTLIBRARIES = libpotrace.la
 libpotrace_la_SOURCES = $(libsources)
-libpotrace_la_LDFLAGS = -version-info 0:5:0 -rpath '$(libdir)' \
+libpotrace_la_LDFLAGS = -version-info 0:6:0 -rpath '$(libdir)' \
  -export-symbols $(srcdir)/libpotrace-export.sym -no-undefined
 libpotrace_la_LIBADD = -lm
 MOSTLYCLEANFILES = libpotrace.la
@@ -56,4 +58,4 @@ EXTRA_HEADERS = potracelib.h
 #----------------------------------------------------------------------
 # other stuff to distribute
 
-EXTRA_DIST = getopt.c getopt1.c include/getopt/getopt.h libpotrace-export.sym
+EXTRA_DIST = libpotrace-export.sym

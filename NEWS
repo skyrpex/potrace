@@ -1,3 +1,14 @@
+September 17, 2019: Release 1.16
+
+ This release consists of bugfixes and minor portability improvements.
+ A potential arithmetic overflow was fixed. Rotation angles are now
+ normalized to between -180 and 180. We now use binary file I/O on the
+ OS/2 platform. The test suite tolerances were adjusted. The
+ configuration option --enable-local-getopt was renamed as
+ --with-included-getopt. Some build system improvements. Thanks to
+ Henri Salo and Dave Yeo for reporting bugs and suggesting
+ improvements.
+
 August 5, 2017: Release 1.15
 
  This release consists of bugfixes and minor portability improvements.

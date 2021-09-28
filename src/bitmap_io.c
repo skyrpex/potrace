@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2017 Peter Selinger.
+/* Copyright (C) 2001-2019 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -10,6 +10,9 @@
 #endif
 
 #include <stdio.h>
+#ifdef HAVE_INTTYPES_H
+#include <inttypes.h>
+#endif
 
 #include "bitmap.h"
 #include "bitops.h"
@@ -56,7 +59,7 @@ static int fgetc_ws(FILE *f) {
 
 static int readnum(FILE *f) {
   int c;
-  int acc;
+  uint64_t acc;
 
   /* skip whitespace and comments */
   while (1) {
@@ -82,6 +85,9 @@ static int readnum(FILE *f) {
     }
     acc *= 10;
     acc += c-'0';
+    if (acc > 0x7fffffff) {
+      return -1;
+    }
   }
   return acc;
 }

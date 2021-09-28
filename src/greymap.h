@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2017 Peter Selinger.
+/* Copyright (C) 2001-2019 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -12,6 +12,8 @@
 
 /* type for greymap samples */
 typedef signed short int gm_sample_t;
+
+#define GM_SAMPLESIZE (sizeof(gm_sample_t))
 
 /* internal format for greymaps. Note: in this format, rows are
    ordered from bottom to top. The pixels in each row are given from

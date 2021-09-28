@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# Copyright (C) 2001-2017 Peter Selinger.
+# Copyright (C) 2001-2019 Peter Selinger.
 # This file is part of Potrace. It is free software and it is covered
 # by the GNU General Public License. See the file COPYING for details.
 
@@ -72,15 +72,15 @@ if test $? -ne 0 -o ! -f "$TMP2"; then
     echo "GS does not understand PDF; skipping this test" >& 2
     exit 77
 fi 
-actiondiff "$TMP2" "$REFDATA" 1000
+actiondiff "$TMP2" "$REFDATA" 2000
 
 action $POTRACE -r50 -p -L 0 -B 0 --opaque -b pdf -o "$TMP1" "$DATA"
 action "$GS" -q -dNOPAUSE -sDEVICE=pbmraw -g460x394 -r100x100 -sOutputFile="$TMP2" -- "$TMP1"
-actiondiff "$TMP2" "$REFDATA" 1200
+actiondiff "$TMP2" "$REFDATA" 2000
 
 action $POTRACE -r50 -p -L 0 -B 0 -A 160 -b pdf -o "$TMP1" "$DATA"
 action "$GS" -q -dNOPAUSE -sDEVICE=pbmraw -g568x528 -r100x100 -sOutputFile="$TMP2" -- "$TMP1"
-actiondiff "$TMP2" "$REFDATAROT" 1200
+actiondiff "$TMP2" "$REFDATAROT" 2000
 
 action rm -f "$TMP1"
 action rm -f "$TMP2"

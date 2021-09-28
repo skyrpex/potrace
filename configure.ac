@@ -1,4 +1,4 @@
-dnl Copyright (C) 2001-2017 Peter Selinger.
+dnl Copyright (C) 2001-2019 Peter Selinger.
 dnl This file is part of Potrace. It is free software and it is covered
 dnl by the GNU General Public License. See the file COPYING for details.
 
@@ -6,13 +6,13 @@ dnl Process this file with autoconf to produce a configure script.
 
 dnl ----------------------------------------------------------------------
 dnl Package info
-AC_INIT([potrace],[1.15],[selinger at users.sourceforge.net])
+AC_INIT([potrace],[1.16],[selinger at users.sourceforge.net])
 AC_CONFIG_SRCDIR(src/trace.c)
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADER(config.h)
 AC_CONFIG_MACRO_DIR([m4])
 
-DATE="August 2017"
+DATE="September 2019"
 
 dnl ----------------------------------------------------------------------
 dnl The names of the installed executables are defined here, but
@@ -29,6 +29,7 @@ dnl figure out compiler options
 
 dnl Check for compiler
 AC_PROG_CC([clang gcc cc c99 mgcc c89 pcc opencc sunc99 suncc])
+AC_USE_SYSTEM_EXTENSIONS
 
 dnl Also add CADD to the CFLAGS at configure time or compile time
 AC_SUBST(CADD)
@@ -222,11 +223,11 @@ if test "$have_getopt_long" = "yes"; then
    have_getopt_long=no])
 fi
 
-AC_ARG_ENABLE(local-getopt,
- AS_HELP_STRING([--enable-local-getopt],[avoid using the system-wide getopt library]))
+AC_ARG_WITH(included-getopt,
+ AS_HELP_STRING([--with-included-getopt],[avoid using the system-wide getopt library]))
 
-AC_MSG_CHECKING(whether to use local getopt)
-if test "$have_getopt_long" != "yes" || test "$enable_local_getopt" = yes; then 
+AC_MSG_CHECKING(whether to use included getopt)
+if test "$have_getopt_long" != "yes" || test "$with_included_getopt" = yes; then 
    EXTRA_OBJS="$EXTRA_OBJS getopt.o getopt1.o"
    EXTRA_INCLUDES="$EXTRA_INCLUDES -I\$(srcdir)/include/getopt"
    AC_MSG_RESULT(yes)

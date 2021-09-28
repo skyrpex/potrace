@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2017 Peter Selinger.
+/* Copyright (C) 2001-2019 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -6,14 +6,6 @@
    while optionally applying the following enhancements: highpass
    filter (evening out background gradients), lowpass filter
    (smoothing foreground details), interpolated scaling, inversion. */
-
-#ifndef _POSIX_C_SOURCE
-#define _POSIX_C_SOURCE 200809L
-#endif
-
-#ifndef _NETBSD_SOURCE
-#define _NETBSD_SOURCE 1
-#endif
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -572,11 +564,11 @@ static void dopts(int ac, char *av[]) {
       exit(0);
       break;
     case 'v':
-      fprintf(stdout, "" MKBITMAP " " VERSION ". Copyright (C) 2001-2017 Peter Selinger.\n");
+      fprintf(stdout, "" MKBITMAP " " VERSION ". Copyright (C) 2001-2019 Peter Selinger.\n");
       exit(0);
       break;
     case 'l':
-      fprintf(stdout, "" MKBITMAP " " VERSION ". Copyright (C) 2001-2017 Peter Selinger.\n\n");
+      fprintf(stdout, "" MKBITMAP " " VERSION ". Copyright (C) 2001-2019 Peter Selinger.\n\n");
       license(stdout);
       exit(0);
       break;

@@ -1,14 +1,6 @@
-/* Copyright (C) 2001-2017 Peter Selinger.
+/* Copyright (C) 2001-2019 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
-
-#ifndef _POSIX_C_SOURCE
-#define _POSIX_C_SOURCE 200809L
-#endif
-
-#ifndef _NETBSD_SOURCE
-#define _NETBSD_SOURCE 1
-#endif
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -493,13 +485,13 @@ static void dopts(int ac, char *av[]) {
       break;
     case 'v':
     case 'V':
-      fprintf(stdout, "" POTRACE " " VERSION ". Copyright (C) 2001-2017 Peter Selinger.\n");
+      fprintf(stdout, "" POTRACE " " VERSION ". Copyright (C) 2001-2019 Peter Selinger.\n");
       fprintf(stdout, "Library version: %s\n", potrace_version());
       show_defaults(stdout);
       exit(0);
       break;
     case 'l':
-      fprintf(stdout, "" POTRACE " " VERSION ". Copyright (C) 2001-2017 Peter Selinger.\n\n");
+      fprintf(stdout, "" POTRACE " " VERSION ". Copyright (C) 2001-2019 Peter Selinger.\n\n");
       license(stdout);
       exit(0);
       break;
@@ -594,6 +586,9 @@ static void dopts(int ac, char *av[]) {
       if (*p) {
 	fprintf(stderr, "" POTRACE ": invalid angle -- %s\n", optarg);
 	exit(1);
+      }
+      if (info.angle <= -180 || info.angle > 180) {
+        info.angle -= 360 * ceil(info.angle / 360 - 0.5);
       }
       break;
     case 'P':

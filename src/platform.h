@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2017 Peter Selinger.
+/* Copyright (C) 2001-2019 Peter Selinger.
    This file is part of Potrace. It is free software and it is covered
    by the GNU General Public License. See the file COPYING for details. */
 
@@ -11,7 +11,7 @@
 #include <config.h>
 #endif
 
-/* in Windows, set all file i/o to binary */
+/* in Windows and OS/2, set all file i/o to binary */
 #ifdef __MINGW32__
 #include <fcntl.h>
 unsigned int _CRT_fmode = _O_BINARY;
@@ -25,13 +25,23 @@ static inline void platform_init(void) {
 #include <fcntl.h>
 #include <io.h>
 static inline void platform_init(void) {
-  setmode(0,O_BINARY); 
-  setmode(1,O_BINARY);
+  setmode(0, O_BINARY); 
+  setmode(1, O_BINARY);
 }
 #else
+
+#ifdef __OS2__
+#include <fcntl.h>
+static inline void platform_init(void) {
+  setmode(fileno(stdin), O_BINARY);
+  setmode(fileno(stdout), O_BINARY);
+}
+#else
+
 static inline void platform_init(void) {
   /* NOP */
 }
+#endif
 #endif
 #endif
 

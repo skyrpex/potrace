@@ -1,5 +1,18 @@
 ChangeLog
 
+v1.16 2019/09/17
+	(2019/09/16) PS1 - portability: use AC_USE_SYSTEM_EXTENSIONS
+        instead of individual feature test macros.
+	(2019/09/16) PS1 - automake: handle conditional sources better.
+	(2019/05/16) PS1 - normalize rotation angle
+	(2019/02/26) PS1 - portability: use binary file i/o in OS/2,
+	suggested by Dave Yeo.
+	(2018/07/27) PS1 - autoconf: renamed --enable-local-getopt as
+	--with-included-getopt.
+	(2018/07/26) PS1 - test suite: adjusted tolerances.
+	(2017/08/06) PS1 - fixed a potential arithmetic overflow. Fixes
+	bugs #23 and #24 reported by Henri Salo.
+
 v1.15 2017/08/05
 	(2017/08/05) PS1 - use round() instead of rint()
 	(2017/08/05) PS1 - portability: set both _POSIX_C_SOURCE and

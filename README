@@ -40,7 +40,7 @@ COMPILATION
   --enable-metric         use metric units (centimeters) as default
   --enable-a4             use a4 as the default papersize
   --enable-dumb-tty       use simplified ASCII-only progress bar
-  --enable-local-getopt   avoid using the system-wide getopt library
+  --with-included-getopt  avoid using the system-wide getopt library
 
  See also ./configure --help.
 
@@ -158,7 +158,7 @@ DOCUMENTATION
 
 COPYRIGHT
 
- Copyright (C) 2001-2017 Peter Selinger
+ Copyright (C) 2001-2019 Peter Selinger
 
  The use of the name "Potrace" is governed by a separate policy, see
  TRADEMARKS below.
